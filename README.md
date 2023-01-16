@@ -7,7 +7,7 @@
 
 # DIRECTORY STRUCTURE AND EXPLANATION
 
-- deploydigi.sh: script to deploy all services to their respective aws ec2 instances
+- deploydigi.sh: script to deploy all services to their respective aws ec2 instances. contains ansible playbooks to deploy services to aws ec2
 
 - ansible.cfg: ansible configuration file. hosy key checking was set to false to prevent ssh key prompt on first connection to remote servers
 
@@ -33,7 +33,7 @@
 3. create a project directory in ansible control machine
 4. download and install ansible on ansible control machine
 5. setup microservice application(s) remote instance(s) on aws ec2
-6. setup inventory file with login config to remote instances
+6. setup inventory file with login config to remote instances on ansible control machine
 7. clone git repositories with application code to ansible control machine
 8. run deploydigi.sh script
 9. test deployment on remote machines
