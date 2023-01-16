@@ -1,0 +1,15 @@
+---
+- name: Copy config directory and deploy
+  hosts: configuration
+  become: yes
+  tasks:
+    - name: Copying config Directory contents
+      copy:
+        src: /home/ubuntu/dw-auth/ansible/digiwallet-config-service/
+        dest: /home/ubuntu
+          
+    - name: Deploy with docker-compose
+      community.docker.docker_compose:
+        project_src: /home/ubuntu
+        files:
+          - docker-compose.yml

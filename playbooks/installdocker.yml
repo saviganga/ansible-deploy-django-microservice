@@ -1,0 +1,46 @@
+---
+- name: Install docker and docker-compose
+  hosts: servers
+  become: yes
+  tasks:
+
+    - name: install and updat apt
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: yes
+
+    - name: install system packages
+      apt: name={{item}} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'python-pip', 'virtualenv', 'python3-setuptools' ]
+
+    - name: Install docker GPG
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: add docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu jammy stable
+        state: present
+
+    - name: install docker
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        update_cache: yes
+
+    - name: add docker permissions
+      shell: usermod -aG docker ubuntu
+
+    - name: install package manager
+      apt:
+        name: python3-pip
+
+    - name: install python sdk
+      pip:
+        name:
+          - docker
+          - docker-compose

@@ -1,0 +1,15 @@
+---
+- name: Copy wallet directory and deploy
+  hosts: wallet
+  become: yes
+  tasks:
+    - name: Copying wallet Directory contents
+      copy:
+        src: /home/ubuntu/dw-auth/ansible/digiwallet-wallet-service/
+        dest: /home/ubuntu
+          
+    - name: Deploy with docker-compose
+      community.docker.docker_compose:
+        project_src: /home/ubuntu
+        files:
+          - docker-compose.yml

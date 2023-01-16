@@ -1,0 +1,21 @@
+web ansible_host=172.31.80.65
+auth ansible_host=172.31.81.77
+config ansible_host=172.31.92.220
+
+[servers]
+web
+auth
+config
+
+[authentication]
+auth
+
+[configuration]
+config
+
+[wallet]
+web
+
+[servers:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=wbb.pem

@@ -1,0 +1,15 @@
+---
+- name: Copy auth directory and deploy
+  hosts: authentication
+  become: yes
+  tasks:
+    - name: Copying auth Directory contents
+      copy:
+        src: /home/ubuntu/dw-auth/ansible/digiwallet-auth-service/
+        dest: /home/ubuntu
+          
+    - name: Deploy with docker-compose
+      community.docker.docker_compose:
+        project_src: /home/ubuntu
+        files:
+          - docker-compose.yml
